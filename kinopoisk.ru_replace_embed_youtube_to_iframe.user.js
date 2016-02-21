@@ -5,8 +5,8 @@
 // @namespace       github.com/totalamd
 // @match           *://*.kinopoisk.ru/*
 // @version         1
-// @downloadURL 
-// @updateURL   
+// @downloadUR      https://raw.githubusercontent.com/totalamd/GM-scripts/master/kinopoisk.ru_replace_embed_youtube_to_iframe.user.js
+// @updateURL       https://raw.githubusercontent.com/totalamd/GM-scripts/master/kinopoisk.ru_replace_embed_youtube_to_iframe.user.js
 // @grant           none
 // @noframes
 // ==/UserScript==
