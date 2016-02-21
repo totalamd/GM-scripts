@@ -14,9 +14,6 @@
 "use strict";
 
 (function(){
-  let l = function(){}, i = function(){};
-  l = console.log.bind(console), i = console.info.bind(console);
-
 	const objList = Array.from(document.querySelectorAll('.youtubeTrailers > object'));
 	objList.forEach(function(obj){
 		const param = obj.querySelector('param[name="movie"]');
@@ -31,7 +28,6 @@
 			iframe.height = 360;
 			iframe.frameBorder = 0;
 			obj.parentElement.replaceChild(iframe, obj);
-			//old.parentElement.replaceChild(new, old)
 		}
 	});
 }())
