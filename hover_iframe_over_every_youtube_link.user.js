@@ -1,16 +1,21 @@
 // ==UserScript==
 // @name            hover iframe over every youtube link
 // @name:ru         всплывающее видео при клике на youtube-ссылку
-// @description     
-// @description:ru  
+// @description     to close video press ESC or click on the grey background
+// @description:ru  для закрытия видео нажмите ESC или кликнике на сервый фон вокруг видео
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1
-// @downloadURL 
-// @updateURL   
+// @version         1.0.1
+// @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
+// @updateURL       https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @grant           none
 // ==/UserScript==
+
+
+// TODO:
+// - [ ] fix catching 'esc' keydown event through youtube iframe
+// - [ ] deal with removing all 'removing' event listeners if any one fired
 
 "use strict";
 
@@ -20,8 +25,7 @@
 
 	const LinksList = Array.from(document.querySelectorAll('a'));
   LinksList.forEach(function(link) {
-	//link.addEventListener('click', function(e){console.log(this), e.preventDefault();});
-	link.addEventListener('click', openIframe);
+		link.addEventListener('click', openIframe);
   });
 	
 	function openIframe (e) {
@@ -34,7 +38,7 @@
 		console.log(id);		
 		e.preventDefault();
 		const width = 560; //1280;
-		const height = /*315; //*/720;
+		const height = 315; //720;
 		const hover = document.createElement('div');
 		const iframe = document.createElement('iframe');
 		hover.style.position = 'fixed';
@@ -46,7 +50,6 @@
 		iframe.src = `//youtube.com/embed/${id}`;
 		iframe.width = width;
 		iframe.height = height;
-		//iframe.id = id;
 		iframe.allowFullscreen = true;
 		iframe.frameBorder = 0;
 		iframe.style.position = 'absolute';
