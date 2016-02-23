@@ -6,7 +6,7 @@
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1.0.1
+// @version         1.0.2
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @grant           none
@@ -37,8 +37,8 @@
 		} else {return;}
 		console.log(id);		
 		e.preventDefault();
-		const width = 560; //1280;
-		const height = 315; //720;
+		const width = 853; //1280;
+		const height = 480; //720;
 		const hover = document.createElement('div');
 		const iframe = document.createElement('iframe');
 		hover.style.position = 'fixed';
@@ -53,8 +53,8 @@
 		iframe.allowFullscreen = true;
 		iframe.frameBorder = 0;
 		iframe.style.position = 'absolute';
-		iframe.style.left = `calc(50% - ${width/2}px)`;
-		iframe.style.top = `calc(50% - ${height/2}px)`;
+		iframe.style.left = window.innerWidth/2 - width/2 + 'px';
+		iframe.style.top = window.innerHeight/2 - height/2 + 'px';
 		hover.appendChild(iframe);
 		document.body.appendChild(hover);
 		console.info('add');
