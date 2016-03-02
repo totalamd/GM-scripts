@@ -1,3 +1,6 @@
+// add this code to new bookmark with javascript: protocol prefaced
+// activate this bookmarklet to obtain semitransparent scroll progressbar at the top of the page
+
 const divContainer = document.createElement('div');
 const divBar = document.createElement('div');
 divContainer.appendChild(divBar);
