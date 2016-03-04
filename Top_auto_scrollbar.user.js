@@ -42,10 +42,14 @@ const l = function(){}, i = function(){};
 	}
 
 	function showList() {
-		console.log('Activation list:');
-		GM_listValues().forEach(function (e) {
-			console.log(e, GM_getValue(e));
-		})
+		if (GM_listValues().length === 0) {
+			console.log('Activation list is empty.');
+		} else {
+			console.log('Activation list:');
+			GM_listValues().forEach(function (e) {
+				console.log(e, GM_getValue(e));
+			})
+		}
 	}
 
 	function update() {
