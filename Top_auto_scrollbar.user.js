@@ -22,62 +22,84 @@ const l = function(){}, i = function(){};
 
 (function(){
 	const l = console.log.bind(console), i = console.info.bind(console);
-			
+
 	function addToList() {
-		GM_setValue(location.hostname, true);
+		let locations = GM_getValue('locations') || {};
+		locations[location.hostname] = true;
+		GM_setValue('locations', locations);
 		location.reload();
 	}
-	
+
 	function delFromList() {
-		GM_deleteValue(location.hostname);
+		let locations = GM_getValue('locations');
+		delete locations[location.hostname];
+		GM_setValue('locations', locations);
 		location.reload();
 	}
 
 	function clearList() {
 		if (confirm('Are you sure?')) {
-			GM_listValues().forEach(function (e) {
-				GM_deleteValue(e);
-			})
+			console.log('Anti-activation list was:\n', GM_getValue('locations'));
+			GM_deleteValue('locations');
 		}
 	}
 
 	function showList() {
-		if (GM_listValues().length === 0) {
-			console.log('Activation list is empty.');
+		if (!GM_getValue('locations')) {
+			console.log('Anti-activation list is empty.');
 		} else {
 			console.log('Activation list:');
-			GM_listValues().forEach(function (e) {
-				console.log(e, GM_getValue(e));
-			})
+			for (let item in GM_getValue('locations')) {
+				console.log(item);
+			}
+		}
+	}
+
+	function setHeight(){
+		let height;
+		if ((height = parseInt(prompt('enter height, in px', 5))) && (height > 0)) {
+			GM_setValue('height', height + 'px');
+			divContainer.style.height = height + 'px';
+		}
+	}
+
+	function setOpacity(){
+		let opacity;
+		if ((opacity = parseFloat(prompt('enter opacity, from 0 to 1', 0.8))) && (opacity > 0) && (opacity <= 1)) {
+			GM_setValue('opacity', opacity);
+			divContainer.style.opacity = opacity;
 		}
 	}
 
 	function update() {
 		divBar.style.width = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight), 1) * 100 + '%';
-		divContainer.title = parseFloat(divBar.style.width).toFixed() + '%' + '\n' + (document.body.scrollHeight / window.innerHeight).toFixed(1);
+		divContainer.title = parseFloat(divBar.style.width).toFixed() + '%' + '\nPage ' + (document.body.scrollHeight / window.innerHeight).toFixed(1) + ' times the length of the screen';
 	}
 
-	if (!GM_getValue(location.hostname)) {
+
+	if (!(location.hostname in (GM_getValue('locations') || {}))) {
 		GM_registerMenuCommand("Don't activate scrollbar on this site", addToList);
 	} else {
 		GM_registerMenuCommand("Reactivate scrollbar on this site", delFromList);
 	}
 	GM_registerMenuCommand("Clear anti-activation list", clearList);
 	GM_registerMenuCommand("Show anti-activation list", showList);
+	GM_registerMenuCommand("Set bar height", setHeight);
+	GM_registerMenuCommand("Set bar opacity", setOpacity);
 
 	if (document.body.scrollHeight / window.innerHeight <= 3) {
-		l('page too short');
+		l('page\'s too short');
 		return;
-	} else if (GM_getValue(location.hostname)) {
-		l(`${location.hostname} is in the anti-activation list.`);
+	} else if (location.hostname in (GM_getValue('locations') || {})) {
+		l(`'${location.hostname}' is in the anti-activation list.`);
 		return;
 	}
 
 	const divContainer = document.createElement('div');
 	const divBar = document.createElement('div');
 	divContainer.style.position = 'fixed';
-	divContainer.style.opacity = '0.8';
-	divContainer.style.height = '5px';
+	divContainer.style.opacity = GM_getValue('opacity') || 0.8;
+	divContainer.style.height = GM_getValue('height') || '5px';
 	divContainer.style.width = '100%';
 	divContainer.style.top = '0';
 	divContainer.style.left = '0';
