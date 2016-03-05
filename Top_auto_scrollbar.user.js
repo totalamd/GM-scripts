@@ -6,7 +6,7 @@
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1
+// @version         1.0.1
 // @downloadURL 
 // @updateURL   
 // @grant           GM_listValues
