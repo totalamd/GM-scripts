@@ -54,7 +54,7 @@ const l = function(){}, i = function(){};
 
 	function update() {
 		divBar.style.width = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight), 1) * 100 + '%';
-		divContainer.title = parseFloat(divBar.style.width).toFixed() + '%';
+		divContainer.title = parseFloat(divBar.style.width).toFixed() + '%' + '\n' + (document.body.scrollHeight / window.innerHeight).toFixed(1);
 	}
 
 	if (!GM_getValue(location.hostname)) {
