@@ -62,17 +62,21 @@ const l = function(){}, i = function(){};
 	} else {
 		GM_registerMenuCommand("Reactivate scrollbar on this site", delFromList);
 	}
-	GM_registerMenuCommand("Clear activation list", clearList);
-	GM_registerMenuCommand("Show activation list", showList);
+	GM_registerMenuCommand("Clear anti-activation list", clearList);
+	GM_registerMenuCommand("Show anti-activation list", showList);
 
-	if (document.body.scrollHeight / window.innerHeight <= 3 || GM_getValue(location.hostname)) {
+	if (document.body.scrollHeight / window.innerHeight <= 3) {
+		l('page too short');
+		return;
+	} else if (GM_getValue(location.hostname)) {
+		l(`${location.hostname} is in the anti-activation list.`);
 		return;
 	}
 
 	const divContainer = document.createElement('div');
 	const divBar = document.createElement('div');
 	divContainer.style.position = 'fixed';
-	divContainer.style.opacity = '0.5';
+	divContainer.style.opacity = '0.8';
 	divContainer.style.height = '5px';
 	divContainer.style.width = '100%';
 	divContainer.style.top = '0';
