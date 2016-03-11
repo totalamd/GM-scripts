@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name            Top auto scrollbar
-// @name:r          %name%
-// @descriptio      Automatic appearing top scrollbar if the page length is more than twice the height of the screen
+// @name:ru         %name%
+// @description     Automatic appearing top scrollbar if the page length is more than twice the height of the screen
 // @description:ru  %description%
-// @namespac        github.com/totalamd
+// @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
 // @version         1.0.1
-// @downloadUR      https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
-// @updateUR        https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
+// @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
+// @updateURL       https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @grant           GM_listValues
 // @grant           GM_setValue
 // @grant           GM_getValue
