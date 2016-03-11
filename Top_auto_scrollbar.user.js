@@ -76,7 +76,6 @@ const l = function(){}, i = function(){};
 		divContainer.title = parseFloat(divBar.style.width).toFixed() + '%' + '\nPage ' + (document.body.scrollHeight / window.innerHeight).toFixed(1) + ' times the length of the screen';
 	}
 
-
 	if (!(location.hostname in (GM_getValue('locations') || {}))) {
 		GM_registerMenuCommand("Don't activate scrollbar on this site", addToList);
 	} else {
@@ -88,7 +87,7 @@ const l = function(){}, i = function(){};
 	GM_registerMenuCommand("Set bar opacity", setOpacity);
 
 	if (document.body.scrollHeight / window.innerHeight <= 3) {
-		l('page\'s too short');
+		l('Top scrollbar: page\'s too short');
 		return;
 	} else if (location.hostname in (GM_getValue('locations') || {})) {
 		l(`'${location.hostname}' is in the anti-activation list.`);
@@ -103,8 +102,9 @@ const l = function(){}, i = function(){};
 	divContainer.style.width = '100%';
 	divContainer.style.top = '0';
 	divContainer.style.left = '0';
-	divContainer.style.backgroundColor = 'blue';
+	divContainer.style.backgroundColor = 'cornflowerblue';
 	divContainer.style.zIndex = '2147483647';
+	divContainer.style.cursor = 'auto';
 	divBar.style.height = '100%';
 	divBar.style.backgroundColor = 'hotpink';
 	divBar.style.width = '0';
