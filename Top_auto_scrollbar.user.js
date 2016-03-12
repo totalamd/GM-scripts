@@ -73,7 +73,7 @@ const l = function(){}, i = function(){};
 
 	function update() {
 		divBar.style.width = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight), 1) * 100 + '%';
-		divContainer.title = `${parseFloat(divBar.style.width).toFixed()}%\nThe page is ${(document.body.scrollHeight / window.innerHeight).toFixed(1)} times longer than the screen`
+		divContainer.title = `${parseFloat(divBar.style.width).toFixed()}%\nPage is ${(document.body.scrollHeight / window.innerHeight).toFixed(1)} times as high as screen`;
 	}
 
 	if (!(location.hostname in (GM_getValue('locations') || {}))) {
