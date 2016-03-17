@@ -14,19 +14,16 @@
 // TODO:
 // [ ] make autostop only on main site OR autoplay = 1
 
-
-
-
 "use strict";
 
 (function(){
 	let l = function(){}, i = function(){};
 	l = console.log.bind(console), i = console.info.bind(console);
 
-	const embed_url_pattern = /^https?:\/\/(?:www.)?youtube\.com\/embed\/([\w-]+)/;         // embed iframe
-	const main_url_pattern = /^https?:\/\/(?:www.)?youtube\.com\/watch\?v=([\w-]+)/;     // main YT site
-	const video_id_pattern = /^https?:\/\/(?:www.)?youtube\.com\/(?:watch\?v=|embed\/)([\w-]+)/; // overall regexp
-	const autoplay_pattern = / /;
+	const embed_url_pattern = /^https?:\/\/(?:www.)?youtube\.com\/embed\/([\w-]+)/;               // embed iframe
+	const main_url_pattern = /^https?:\/\/(?:www.)?youtube\.com\/watch\?v=([\w-]+)/;              // main YT site
+	const video_id_pattern = /^https?:\/\/(?:www.)?youtube\.com\/(?:watch\?v=|embed\/)([\w-]+)/;  // overall regexp
+	// const autoplay_pattern = / /;
 	let video_id;
 	let timing;
 	let video = document.querySelector('video.html5-main-video');
@@ -50,17 +47,11 @@
 		timing = GM_getValue(video_id);
 		if (timing !== undefined) {
 			console.info(document.title, video_id, '>> loading:', timing);
-			// console.info(location.hostname, window.self === window.top);
 			video.currentTime = timing;
 		} else {console.info(document.title, '>> new video');}
-		// video.pause();
-		// console.log(video.paused);
 	}
 	
-/*function get_video_id() {
-		if (video_id = location.href.match(video_id_pattern)) video_id = video_id[1];
-	}*/
-	
+	// TODO
 	/*
   // if embeded
 	if (location.hostname === "") { 
@@ -75,36 +66,17 @@
 	}
 	*/
 	
-	
-	// console.log('go');
-	// get_video_id();
 	if (location.hostname === "www.youtube.com") {
 		video_id = location.href.match(video_id_pattern)[1];
 		if (!video) {video = document.querySelector('video.html5-main-video');}
 		loadTiming();
 	
+// get all GET params
 /*let paramsArray = {};
 	location.search.substr(1).split('&').forEach(function(e){
 		paramsArray[e.split('=')[0]] = e.split('=')[1];
 	});*/
 
-
-//	window.handleEvent = function (e){
-//		console.log(e.type, /*e.target.localName,*/ Math.floor(video.currentTime), video.src);
-//     if (e.type == 'unload') {saveTiming();}
-//     if (e.type == 'play' || e.type == 'pause' || e.type == 'canplay') {console.log(video.currentTime)}
-//       if (e.type == 'abort' || e.type == 'play') {}
-//	}
-
-
-/*
-		video.addEventListener('timeupdate', function pauseOnce() {
-			if (video.paused) {console.log('pause and paused'); video.removeEventListener('timeupdate', pauseOnce);}
-			// console.log(video.paused);
-			video.pause();
-		});
-*/
-		
 		video.addEventListener('timeupdate', function(){
 			// console.info('timeupdate!');
 			saveTiming();
