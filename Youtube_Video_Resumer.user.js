@@ -53,7 +53,7 @@
 	
 	// TODO
 	/*
-  // if embeded
+	// if embeded
 	if (location.hostname === "") { 
 		// if autoplay=1
 		if ()
@@ -71,8 +71,8 @@
 		if (!video) {video = document.querySelector('video.html5-main-video');}
 		loadTiming();
 	
-// get all GET params
-/*let paramsArray = {};
+	// get all GET params
+	/*let paramsArray = {};
 	location.search.substr(1).split('&').forEach(function(e){
 		paramsArray[e.split('=')[0]] = e.split('=')[1];
 	});*/
