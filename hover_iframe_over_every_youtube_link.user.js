@@ -1,5 +1,5 @@
-// ==UserScript==
-// @name            hover iframe over every youtube link
+﻿// ==UserScript==
+// @name            pop-up video iframe over every youtube link
 // @name:ru         всплывающее видео при клике на youtube-ссылку
 // @description     to close video press ESC or click on the grey background
 // @description:ru  для закрытия видео нажмите ESC или кликнике на сервый фон вокруг видео
@@ -12,7 +12,6 @@
 // @grant           none
 // ==/UserScript==
 
-
 // TODO:
 // - [ ] fix catching 'esc' keydown event through youtube iframe
 // - [ ] deal with removing all 'removing' event listeners if any one fired
@@ -21,7 +20,7 @@
 
 (function(){
 	let l = function(){}, i = function(){};
-	l = console.log.bind(console), i = console.info.bind(console);
+	const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
 
 	const LinksList = Array.from(document.querySelectorAll('a'));
   LinksList.forEach(function(link) {
@@ -57,17 +56,17 @@
 		iframe.style.top = window.innerHeight/2 - height/2 + 'px';
 		hover.appendChild(iframe);
 		document.body.appendChild(hover);
-		console.info('add');
+		i('add');
 		hover.addEventListener('click', function removeIframeClick(e){
 			document.body.removeChild(hover);
-			console.info('remove');
+			i('remove');
 			hover.removeEventListener('click', removeIframeClick);
 		});
 		document.addEventListener('keydown', function removeIframeEsc(e){
-			console.info(e);
+			i(e);
 			if (e.key === "Escape") {
 				document.body.removeChild(hover);
-				console.info('remove');
+				i('remove');
 				document.removeEventListener('click', removeIframeEsc);
 			}
 		})		
