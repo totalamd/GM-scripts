@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            reestr.rublacklist.net URL decoder
-// @name:ru         
+// @name:ru         Киллические адреса страниц для списка reestr.rublacklist.net
 // @description     
 // @description:ru  
 // @namespace       github.com/totalamd
