@@ -34,7 +34,7 @@ const l = function(){}, i = function(){};
 		} else if (e.target.hostname.match(/^youtu\.be$/) && e.target.pathname.match(/\/([\w_-]+)/)) {
 			id = e.target.pathname.match(/\/([\w_-]+)/)[1];
 		} else {return;}
-		console.log(id);		
+		l(id);		
 		e.preventDefault();
 		const width = 853; //1280;
 		const height = 480; //720;
