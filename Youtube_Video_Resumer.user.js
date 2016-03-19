@@ -15,10 +15,10 @@
 // [ ] make autostop only on main site OR autoplay = 1
 
 "use strict";
+const l = function(){}, i = function(){};
 
 (function(){
-	let l = function(){}, i = function(){};
-	l = console.log.bind(console), i = console.info.bind(console);
+	const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
 
 	const embed_url_pattern = /^https?:\/\/(?:www.)?youtube\.com\/embed\/([\w-]+)/;               // embed iframe
 	const main_url_pattern = /^https?:\/\/(?:www.)?youtube\.com\/watch\?v=([\w-]+)/;              // main YT site
@@ -27,28 +27,28 @@
 	let video_id;
 	let timing;
 	let video = document.querySelector('video.html5-main-video');
-	// console.log(`new run\n`, location.href, `\n`, video);
+	// l(`new run\n`, location.href, `\n`, video);
 
 	
 	function saveTiming () {
 		if (!video.ended) {
 			GM_setValue(video_id, video.currentTime);
-			// console.info(document.title, video.currentTime);
+			// i(document.title, video.currentTime);
 		} else {
 			GM_deleteValue(video_id);
-			// console.log(document.title, '<< timeupdate ended detected');
+			// l(document.title, '<< timeupdate ended detected');
 		}
-		if (!video) {console.warn("save: no video!"); return;}
-		if (video.paused) console.info(document.title, video_id, '<< saved', video.currentTime);
+		if (!video) {l("save: no video!"); return;}
+		if (video.paused) i(document.title, video_id, '<< saved', video.currentTime);
 	}
 
 	function loadTiming () {
-		if (!video) {console.warn("load: no video!"); video = document.querySelector('video.html5-main-video');}
+		if (!video) {l("load: no video!"); video = document.querySelector('video.html5-main-video');}
 		timing = GM_getValue(video_id);
 		if (timing !== undefined) {
-			console.info(document.title, video_id, '>> loading:', timing);
+			i(document.title, video_id, '>> loading:', timing);
 			video.currentTime = timing;
-		} else {console.info(document.title, '>> new video');}
+		} else {i(document.title, '>> new video');}
 	}
 	
 	// TODO
@@ -61,7 +61,7 @@
 		// AND NOT (main AND top)
 		
 	} else {
-		// console.log('Not yotube video, exiting...');
+		// l('Not yotube video, exiting...');
 		return;
 	}
 	*/
@@ -78,14 +78,14 @@
 	});*/
 
 		video.addEventListener('timeupdate', function(){
-			// console.info('timeupdate!');
+			// i('timeupdate!');
 			saveTiming();
 		});
 		video.addEventListener('ended', function(){
 			saveTiming();
 		})
 	} else {
-		console.info(location.hostname, 'not youtube');
+		i(location.hostname, 'not youtube');
 		return;
 	}
 })()
