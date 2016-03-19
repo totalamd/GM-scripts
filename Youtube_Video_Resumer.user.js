@@ -3,8 +3,8 @@
 // @namespace   totalamd
 // @match       *://*/*
 // @version     1
-// @downloadURL 
-// @updateURL   
+// @downloadURL https://github.com/totalamd/GM-scripts/raw/master/Youtube_Video_Resumer.user.js
+// @updateURL   https://github.com/totalamd/GM-scripts/raw/master/Youtube_Video_Resumer.user.js
 // @grant       GM_listValues
 // @grant       GM_setValue
 // @grant       GM_getValue
