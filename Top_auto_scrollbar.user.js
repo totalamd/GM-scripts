@@ -1,12 +1,11 @@
 // ==UserScript==
 // @name            Top auto scrollbar
-// @name:ru         %name%
-// @description     Automatic appearing top scrollbar if the page length is more than twice the height of the screen
-// @description:ru  %description%
+// @description     Automatic appearing top horizontal scrollbar if the page length is more than thrice the height of the screen. Bar Height and opacity are ajustable by Greasemonkey custom menu.
+// @description:ru  Горизонтальный скроллбар, автоматически появляющийся у верхнего края страницы, если она более чем в три раза длиннее экрана. Ширина и прозрачность настраивается в custom-меню Greasemonkey.
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1.0.2
+// @version         1.0.2.1
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @grant           GM_listValues
