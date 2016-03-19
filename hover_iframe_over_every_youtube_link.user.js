@@ -6,7 +6,7 @@
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1.0.2
+// @version         1.0.2.1
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @grant           none
@@ -17,10 +17,10 @@
 // - [ ] deal with removing all 'removing' event listeners if any one fired
 
 "use strict";
+const l = function(){}, i = function(){};
 
 (function(){
-	let l = function(){}, i = function(){};
-	const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
+	// const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
 
 	const LinksList = Array.from(document.querySelectorAll('a'));
   LinksList.forEach(function(link) {
