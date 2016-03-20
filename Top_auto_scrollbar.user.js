@@ -21,7 +21,7 @@
 // - [ ] think up how to declarate consts inside init() & make its global
 
 "use strict";
-const l = function(){}, i = function(){};
+// const l = function(){}, i = function(){};
 
 (function(){
 	const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
