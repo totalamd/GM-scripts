@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        Medusa.io CardSidebar overflow auto
+// @name        Medusa.io old cards section CardSidebar overflow fix
 // @namespace   totalamd
 // @match       *://meduza.io/cards/*
 // @version     1
