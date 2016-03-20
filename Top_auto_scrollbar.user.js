@@ -19,6 +19,7 @@
 
 // TODO:
 // - [ ] think up how to declarate consts inside init() & make its global
+// - [ ] make it work on peculiar sites like nplus1.ru
 
 "use strict";
 // const l = function(){}, i = function(){};
