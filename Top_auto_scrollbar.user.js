@@ -84,7 +84,7 @@ const l = function(){}, i = function(){};
 		divContainer.title = `${width.toFixed()}%\nPage is ${(document.body.scrollHeight / window.innerHeight).toFixed(1)} times as high as screen`;
 	}
 
-	GM_registerMenuCommand(`-- ${GM_info.script.name} MENU --`);
+	GM_registerMenuCommand(`-- ${GM_info.script.localizedName} MENU --`);
 	if (!(location.hostname in (GM_getValue('locations') || {}))) {
 		GM_registerMenuCommand("Don't activate scrollbar on this site", addToList);
 	} else {
