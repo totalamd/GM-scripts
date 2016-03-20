@@ -84,6 +84,7 @@ const l = function(){}, i = function(){};
 		divContainer.title = `${width.toFixed()}%\nPage is ${(document.body.scrollHeight / window.innerHeight).toFixed(1)} times as high as screen`;
 	}
 
+	GM_registerMenuCommand(`-- ${GM_info.script.name} MENU --`);
 	if (!(location.hostname in (GM_getValue('locations') || {}))) {
 		GM_registerMenuCommand("Don't activate scrollbar on this site", addToList);
 	} else {
@@ -95,6 +96,7 @@ const l = function(){}, i = function(){};
 	GM_registerMenuCommand("Show anti-activation list", showList);
 	GM_registerMenuCommand("Set bar height", setHeight);
 	GM_registerMenuCommand("Set bar opacity", setOpacity);
+	GM_registerMenuCommand("");
 
 	if (document.body.scrollHeight / window.innerHeight <= 3) {
 		l('Page\'s too short');
