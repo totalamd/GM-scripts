@@ -23,9 +23,9 @@ const l = function(){}, i = function(){};
 	// const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
 
 	const LinksList = Array.from(document.querySelectorAll('a'));
-  LinksList.forEach(function(link) {
+	LinksList.forEach(function (link) {
 		link.addEventListener('click', openIframe);
-  });
+	});
 	
 	function openIframe (e) {
 		let id;
