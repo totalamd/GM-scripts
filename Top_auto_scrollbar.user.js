@@ -24,10 +24,10 @@
 // - [ ] detect DOM mutations
 
 "use strict";
-// const l = function(){}, i = function(){};
+const l = function(){}, i = function(){};
 
 (function(){
-	const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
+	// const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
 
 	function addToList() {
 		let locations = GM_getValue('locations') || {};
