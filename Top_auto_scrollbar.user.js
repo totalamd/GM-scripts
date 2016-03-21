@@ -20,6 +20,8 @@
 // TODO:
 // - [ ] think up how to declarate consts inside init() & make its global
 // - [ ] make it work on peculiar sites like nplus1.ru
+// - [ ] add func: click on bar scroll top and back
+// - [ ] detect DOM mutations
 
 "use strict";
 // const l = function(){}, i = function(){};
