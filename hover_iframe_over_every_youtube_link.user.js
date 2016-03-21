@@ -6,7 +6,7 @@
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1.0.2.2
+// @version         1.0.2.3
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @grant           none
@@ -24,7 +24,9 @@ const l = function(){}, i = function(){};
 
 	const LinksList = Array.from(document.querySelectorAll('a'));
 	LinksList.forEach(function (link) {
-		link.addEventListener('click', openIframe);
+		if (link.hostname.match(/youtube\.com$|youtu\.be$/)) {
+			link.addEventListener('click', openIframe);
+		}
 	});
 	
 	function openIframe (e) {
