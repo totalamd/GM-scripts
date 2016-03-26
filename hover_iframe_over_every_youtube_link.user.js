@@ -5,8 +5,8 @@
 // @description:ru  для закрытия видео нажмите ESC или кликнике на сервый фон вокруг видео
 // @namespace       github.com/totalamd
 // @match           *://*/*
-// @exclude         
-// @version         1.0.2.3
+// @exclude         *://*.youtube.com/*
+// @version         1.0.2.4
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @grant           none
