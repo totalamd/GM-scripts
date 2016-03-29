@@ -5,7 +5,7 @@
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1.0.2.2
+// @version         1.1
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @grant           GM_listValues
@@ -20,7 +20,7 @@
 // TODO:
 // - [ ] think up how to declarate consts inside init() & make its global
 // - [ ] make it work on peculiar sites like nplus1.ru
-// - [ ] add func: click on bar scroll top and back
+// - [x] add feature: click on bar scrolls top and back
 // - [ ] detect DOM mutations
 
 "use strict";
@@ -109,12 +109,12 @@ const l = function(){}, i = function(){};
 		return;
 	}
 
-	// declaration outside init() to make its global
+	// declaration outside init() to make its 'global'
 	const divContainer = document.createElement('div');
 	const divBar = document.createElement('div');
 	let divContainerStyle, divBarStyle;
-	
-	function init (){
+
+	function init () {
 		GM_addStyle(`
 		.topAutoScrollbar-divContainer {
 			position: fixed;
@@ -125,13 +125,15 @@ const l = function(){}, i = function(){};
 			left: 0px;
 			background-color: cornflowerblue;
 			z-index: 2147483647;
-			cursor: auto;}
+			cursor: pointer;
+		}
 		.topAutoScrollbar-divBar {
 			height: 100%;
 			background-color: hotpink;
-			width: 0;}`);
+			width: 0;
+		}`);
 
-		// get vars to css properties
+		// get vars to bars width properties
 		for (let sheet of document.styleSheets) {
 			// "Security error" workaround for some external css
 			if (!sheet.href) {
@@ -151,6 +153,23 @@ const l = function(){}, i = function(){};
 		divBar.className = 'topAutoScrollbar-divBar';
 		divContainer.appendChild(divBar);
 		document.body.appendChild(divContainer);
+		let memScroll;
+		let origScrollBehavior;
+		if (document.body.style.scrollBehavior) {
+			origScrollBehavior = document.body.style.scrollBehavior;
+		}
+		// handle clicks on bar: scroll to top and back:
+		divContainer.addEventListener('click', function () {
+			if (origScrollBehavior !== 'smooth') document.body.style.scrollBehavior = 'smooth'; // check to avoid unnecessary CSS manipulation
+			if (!memScroll) {
+				memScroll = window.scrollY;
+				window.scrollTo(window.scrollX,0);
+			} else {
+				window.scrollTo(window.scrollX, memScroll);
+				memScroll = 0;
+			}
+			document.body.style.scrollBehavior = origScrollBehavior || '';
+		});
 	}
 
 	init();
