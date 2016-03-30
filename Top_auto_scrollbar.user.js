@@ -5,7 +5,7 @@
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1.1
+// @version         1.1.1
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @grant           GM_listValues
@@ -153,23 +153,25 @@ const l = function(){}, i = function(){};
 		divBar.className = 'topAutoScrollbar-divBar';
 		divContainer.appendChild(divBar);
 		document.body.appendChild(divContainer);
-		let memScroll;
-		let origScrollBehavior;
-		if (document.body.style.scrollBehavior) {
-			origScrollBehavior = document.body.style.scrollBehavior;
-		}
 		// handle clicks on bar: scroll to top and back:
-		divContainer.addEventListener('click', function () {
-			if (origScrollBehavior !== 'smooth') document.body.style.scrollBehavior = 'smooth'; // check to avoid unnecessary CSS manipulation
-			if (!memScroll) {
-				memScroll = window.scrollY;
-				window.scrollTo(window.scrollX,0);
-			} else {
-				window.scrollTo(window.scrollX, memScroll);
-				memScroll = 0;
-			}
-			document.body.style.scrollBehavior = origScrollBehavior || '';
-		});
+		divContainer.addEventListener('click', navigation);
+	}
+
+	let memPosition;
+	let origScrollBehavior;
+	if (document.body.style.scrollBehavior) {
+		origScrollBehavior = document.body.style.scrollBehavior;
+	}
+
+	function navigation () {
+		if (origScrollBehavior !== 'smooth') document.body.style.scrollBehavior = 'smooth'; // check to avoid unnecessary CSS manipulation
+		if (window.scrollY !== 0) {
+			memPosition = window.scrollY;
+			window.scrollTo(window.scrollX, 0);
+		} else {
+			window.scrollTo(window.scrollX, memPosition);
+		}
+		document.body.style.scrollBehavior = origScrollBehavior || '';
 	}
 
 	init();
