@@ -145,7 +145,6 @@ const l = function(){}, i = function(){};
 		document.body.style.scrollBehavior = origScrollBehavior || '';
 	}
 
-	GM_registerMenuCommand(`-- ${GM_info.script.localizedName} MENU --`);
 	if (!(location.hostname in (GM_getValue('locations') || {}))) {
 		GM_registerMenuCommand("Don't activate scrollbar on this site", addToList);
 	} else {
@@ -157,7 +156,6 @@ const l = function(){}, i = function(){};
 	GM_registerMenuCommand("Show anti-activation list", showList);
 	GM_registerMenuCommand("Set bar height", setHeight);
 	GM_registerMenuCommand("Set bar opacity", setOpacity);
-	GM_registerMenuCommand("");
 
 	// declaration outside init() to make its kinda global
 	const divContainer = document.createElement('div');
