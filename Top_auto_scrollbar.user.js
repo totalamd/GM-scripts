@@ -5,7 +5,7 @@
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1.1.1
+// @version         1.1.2
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @grant           GM_listValues
@@ -82,9 +82,11 @@ const l = function(){}, i = function(){};
 	}
 
 	function update() {
+		// setting nav tooltip
+		window.scrollY ? navTooltip = navTooltipUp : navTooltip = navTooltipDown;
 		const width = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight), 1) * 100;
 		divBarStyle.width = width + '%';
-		divContainer.title = `${width.toFixed()}%\nPage is ${(document.body.scrollHeight / window.innerHeight).toFixed(1)} times as high as screen`;
+		divContainer.title = `${width.toFixed()}%\nPage is ${(document.body.scrollHeight / window.innerHeight).toFixed(1)} times as high as screen\n${navTooltip}`;
 	}
 
 	GM_registerMenuCommand(`-- ${GM_info.script.localizedName} MENU --`);
@@ -157,6 +159,9 @@ const l = function(){}, i = function(){};
 		divContainer.addEventListener('click', navigation);
 	}
 
+	let navTooltipUp = "Click to get to the top";
+	let navTooltipDown = "Click to get back";
+	let navTooltip = "";
 	let memPosition;
 	let origScrollBehavior;
 	if (document.body.style.scrollBehavior) {
@@ -164,7 +169,8 @@ const l = function(){}, i = function(){};
 	}
 
 	function navigation () {
-		if (origScrollBehavior !== 'smooth') document.body.style.scrollBehavior = 'smooth'; // check to avoid unnecessary CSS manipulation
+		// check to avoid unnecessary CSS manipulation:
+		if (origScrollBehavior !== 'smooth') document.body.style.scrollBehavior = 'smooth';
 		if (window.scrollY !== 0) {
 			memPosition = window.scrollY;
 			window.scrollTo(window.scrollX, 0);
