@@ -27,7 +27,7 @@
 const l = function(){}, i = function(){};
 
 (function(){
-	// const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
+	const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
 
 	function addToList() {
 		let locations = GM_getValue('locations') || {};
@@ -82,39 +82,13 @@ const l = function(){}, i = function(){};
 	}
 
 	function update() {
+		// l(window.scrollY);
 		// setting nav tooltip
 		window.scrollY ? navTooltip = navTooltipUp : navTooltip = navTooltipDown;
 		const width = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight), 1) * 100;
 		divBarStyle.width = width + '%';
 		divContainer.title = `${width.toFixed()}%\nPage is ${(document.body.scrollHeight / window.innerHeight).toFixed(1)} times as high as screen\n${navTooltip}`;
 	}
-
-	GM_registerMenuCommand(`-- ${GM_info.script.localizedName} MENU --`);
-	if (!(location.hostname in (GM_getValue('locations') || {}))) {
-		GM_registerMenuCommand("Don't activate scrollbar on this site", addToList);
-	} else {
-		GM_registerMenuCommand("Reactivate scrollbar on this site", delFromList);
-	}
-	if (GM_getValue('locations')) {
-		GM_registerMenuCommand("Clear anti-activation list", clearList);
-	}
-	GM_registerMenuCommand("Show anti-activation list", showList);
-	GM_registerMenuCommand("Set bar height", setHeight);
-	GM_registerMenuCommand("Set bar opacity", setOpacity);
-	GM_registerMenuCommand("");
-
-	if (document.body.scrollHeight / window.innerHeight <= 3) {
-		l('Page\'s too short');
-		return;
-	} else if (location.hostname in (GM_getValue('locations') || {})) {
-		l(`'${location.hostname}' is in the anti-activation list.`);
-		return;
-	}
-
-	// declaration outside init() to make its 'global'
-	const divContainer = document.createElement('div');
-	const divBar = document.createElement('div');
-	let divContainerStyle, divBarStyle;
 
 	function init () {
 		GM_addStyle(`
@@ -159,15 +133,6 @@ const l = function(){}, i = function(){};
 		divContainer.addEventListener('click', navigation);
 	}
 
-	let navTooltipUp = "Click to get to the top";
-	let navTooltipDown = "Click to get back";
-	let navTooltip = "";
-	let memPosition;
-	let origScrollBehavior;
-	if (document.body.style.scrollBehavior) {
-		origScrollBehavior = document.body.style.scrollBehavior;
-	}
-
 	function navigation () {
 		// check to avoid unnecessary CSS manipulation:
 		if (origScrollBehavior !== 'smooth') document.body.style.scrollBehavior = 'smooth';
@@ -178,6 +143,41 @@ const l = function(){}, i = function(){};
 			window.scrollTo(window.scrollX, memPosition);
 		}
 		document.body.style.scrollBehavior = origScrollBehavior || '';
+	}
+
+	GM_registerMenuCommand(`-- ${GM_info.script.localizedName} MENU --`);
+	if (!(location.hostname in (GM_getValue('locations') || {}))) {
+		GM_registerMenuCommand("Don't activate scrollbar on this site", addToList);
+	} else {
+		GM_registerMenuCommand("Reactivate scrollbar on this site", delFromList);
+	}
+	if (GM_getValue('locations')) {
+		GM_registerMenuCommand("Clear anti-activation list", clearList);
+	}
+	GM_registerMenuCommand("Show anti-activation list", showList);
+	GM_registerMenuCommand("Set bar height", setHeight);
+	GM_registerMenuCommand("Set bar opacity", setOpacity);
+	GM_registerMenuCommand("");
+
+	// declaration outside init() to make its kinda global
+	const divContainer = document.createElement('div');
+	const divBar = document.createElement('div');
+	let divContainerStyle, divBarStyle;
+	let navTooltipUp = "Click to get to the top ▲";
+	let navTooltipDown = "Click to get back ▼";
+	let navTooltip = "";
+	let memPosition;
+	let origScrollBehavior;
+	if (document.body.style.scrollBehavior) {
+		origScrollBehavior = document.body.style.scrollBehavior;
+	}
+
+	if (document.body.scrollHeight / window.innerHeight <= 3) {
+		l('Page\'s too short');
+		return;
+	} else if (location.hostname in (GM_getValue('locations') || {})) {
+		l(`'${location.hostname}' is in the anti-activation list.`);
+		return;
 	}
 
 	init();
