@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 // TODO:
-// - [ ] think up how to declarate consts inside init() & make its global
+// - [ ] think up how to declarate consts inside main() & make its global
 // - [ ] make it work on peculiar sites like nplus1.ru
 // - [x] add feature: click on bar scrolls top and back
 // - [ ] detect DOM mutations
@@ -90,7 +90,7 @@ const l = function(){}, i = function(){};
 		divContainer.title = `${width.toFixed()}%\nPage is ${(document.body.scrollHeight / window.innerHeight).toFixed(1)} times as high as screen\n${navTooltip}`;
 	}
 
-	function init () {
+	function main () {
 		GM_addStyle(`
 		.topAutoScrollbar-divContainer {
 			position: fixed;
@@ -125,10 +125,16 @@ const l = function(){}, i = function(){};
 				}
 			}
 		}
+		if (document.body.style.scrollBehavior) {
+			origScrollBehavior = document.body.style.scrollBehavior;
+		}
 		divContainer.className = 'topAutoScrollbar-divContainer';
 		divBar.className = 'topAutoScrollbar-divBar';
 		divContainer.appendChild(divBar);
 		document.body.appendChild(divContainer);
+		// define initial % position:
+		update();
+		window.addEventListener('scroll', update);
 		// handle clicks on bar: scroll to top and back:
 		divContainer.addEventListener('click', navigation);
 	}
@@ -157,7 +163,7 @@ const l = function(){}, i = function(){};
 	GM_registerMenuCommand("Set bar height", setHeight);
 	GM_registerMenuCommand("Set bar opacity", setOpacity);
 
-	// declaration outside init() to make its kinda global
+	// declaration outside main() to make its kinda global
 	const divContainer = document.createElement('div');
 	const divBar = document.createElement('div');
 	let divContainerStyle, divBarStyle;
@@ -166,9 +172,6 @@ const l = function(){}, i = function(){};
 	let navTooltip = "";
 	let memPosition;
 	let origScrollBehavior;
-	if (document.body.style.scrollBehavior) {
-		origScrollBehavior = document.body.style.scrollBehavior;
-	}
 
 	if (document.body.scrollHeight / window.innerHeight <= 3) {
 		l('Page\'s too short');
@@ -178,7 +181,5 @@ const l = function(){}, i = function(){};
 		return;
 	}
 
-	init();
-	update();
-	window.addEventListener('scroll', update);
+	main();
 }())
