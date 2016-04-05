@@ -5,7 +5,7 @@
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1.1.2
+// @version         1.2
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @grant           GM_listValues
@@ -27,7 +27,7 @@
 const l = function(){}, i = function(){};
 
 (function(){
-	const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
+	// const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
 
 	function addToList() {
 		let locations = GM_getValue('locations') || {};
@@ -82,9 +82,7 @@ const l = function(){}, i = function(){};
 	}
 
 	function update() {
-		// l(window.scrollY);
-		// setting nav tooltip
-		window.scrollY ? navTooltip = navTooltipUp : navTooltip = navTooltipDown;
+		const navTooltip = (!memPosition && !window.scrollY) ? '' : (window.scrollY ? navTooltipUp : navTooltipDown);
 		const width = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight), 1) * 100;
 		divBarStyle.width = width + '%';
 		divContainer.title = `${width.toFixed()}%\nPage is ${(document.body.scrollHeight / window.innerHeight).toFixed(1)} times as high as screen\n${navTooltip}`;
@@ -147,6 +145,7 @@ const l = function(){}, i = function(){};
 			window.scrollTo(window.scrollX, 0);
 		} else {
 			window.scrollTo(window.scrollX, memPosition);
+			memPosition = 0;
 		}
 		document.body.style.scrollBehavior = origScrollBehavior || '';
 	}
@@ -156,6 +155,8 @@ const l = function(){}, i = function(){};
 	} else {
 		GM_registerMenuCommand("Reactivate scrollbar on this site", delFromList);
 	}
+
+	// !!!!!!!!!!!!!!   СДЕЛАТЬ ПРОВЕРКУ НА СОДЕРЖИМОЕ, А НЕ НА НАЛИЧИЕ
 	if (GM_getValue('locations')) {
 		GM_registerMenuCommand("Clear anti-activation list", clearList);
 	}
@@ -166,10 +167,9 @@ const l = function(){}, i = function(){};
 	// declaration outside main() to make its kinda global
 	const divContainer = document.createElement('div');
 	const divBar = document.createElement('div');
+	const navTooltipUp = "Click to get to the top ▲";
+	const navTooltipDown = "Click to get back ▼";
 	let divContainerStyle, divBarStyle;
-	let navTooltipUp = "Click to get to the top ▲";
-	let navTooltipDown = "Click to get back ▼";
-	let navTooltip = "";
 	let memPosition;
 	let origScrollBehavior;
 
