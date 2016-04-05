@@ -50,18 +50,19 @@ const l = function(){}, i = function(){};
 				locationsList += '\n' + item;
 			}
 			console.log('Anti-activation list was:', locationsList);
-			GM_deleteValue('locations');
+			GM_setValue('locations', {});
 		}
 	}
 
 	function showList() {
-		if (!GM_getValue('locations')) {
+		if (!Object.keys(GM_getValue('locations') || {}).length) {
 			console.log('Anti-activation list is empty.');
 		} else {
-			console.log('Activation list:');
+			let locationsList = '';
 			for (let item in GM_getValue('locations')) {
-				console.log(item);
+				locationsList += '\n' + item;
 			}
+			console.log('Anti-activation list:', locationsList);
 		}
 	}
 
@@ -155,9 +156,7 @@ const l = function(){}, i = function(){};
 	} else {
 		GM_registerMenuCommand("Reactivate scrollbar on this site", delFromList);
 	}
-
-	// !!!!!!!!!!!!!!   СДЕЛАТЬ ПРОВЕРКУ НА СОДЕРЖИМОЕ, А НЕ НА НАЛИЧИЕ
-	if (GM_getValue('locations')) {
+	if (Object.keys(GM_getValue('locations') || {}).length) {
 		GM_registerMenuCommand("Clear anti-activation list", clearList);
 	}
 	GM_registerMenuCommand("Show anti-activation list", showList);
