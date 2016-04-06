@@ -5,7 +5,7 @@
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         
-// @version         1.2
+// @version         1.2.1
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/Top_auto_scrollbar.user.js
 // @grant           GM_listValues
@@ -30,14 +30,14 @@ const l = function(){}, i = function(){};
 	// const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
 
 	function addToList() {
-		let locations = GM_getValue('locations') || {};
+		let locations = GM_getValue('locations', {});
 		locations[location.hostname] = true;
 		GM_setValue('locations', locations);
 		location.reload();
 	}
 
 	function delFromList() {
-		let locations = GM_getValue('locations');
+		let locations = GM_getValue('locations', {});
 		delete locations[location.hostname];
 		GM_setValue('locations', locations);
 		location.reload();
@@ -46,7 +46,7 @@ const l = function(){}, i = function(){};
 	function clearList() {
 		if (confirm('Are you sure?')) {
 			let locationsList = '';
-			for (let item in GM_getValue('locations')) {
+			for (let item in GM_getValue('locations', {})) {
 				locationsList += '\n' + item;
 			}
 			console.log('Anti-activation list was:', locationsList);
@@ -55,11 +55,11 @@ const l = function(){}, i = function(){};
 	}
 
 	function showList() {
-		if (!Object.keys(GM_getValue('locations') || {}).length) {
+		if (!Object.keys(GM_getValue('locations', {})).length) {
 			console.log('Anti-activation list is empty.');
 		} else {
 			let locationsList = '';
-			for (let item in GM_getValue('locations')) {
+			for (let item in GM_getValue('locations', {})) {
 				locationsList += '\n' + item;
 			}
 			console.log('Anti-activation list:', locationsList);
@@ -151,12 +151,12 @@ const l = function(){}, i = function(){};
 		document.body.style.scrollBehavior = origScrollBehavior || '';
 	}
 
-	if (!(location.hostname in (GM_getValue('locations') || {}))) {
+	if (!(location.hostname in (GM_getValue('locations', {})))) {
 		GM_registerMenuCommand("Don't activate scrollbar on this site", addToList);
 	} else {
 		GM_registerMenuCommand("Reactivate scrollbar on this site", delFromList);
 	}
-	if (Object.keys(GM_getValue('locations') || {}).length) {
+	if (Object.keys(GM_getValue('locations', {})).length) {
 		GM_registerMenuCommand("Clear anti-activation list", clearList);
 	}
 	GM_registerMenuCommand("Show anti-activation list", showList);
@@ -175,7 +175,7 @@ const l = function(){}, i = function(){};
 	if (document.body.scrollHeight / window.innerHeight <= 3) {
 		l('Page\'s too short');
 		return;
-	} else if (location.hostname in (GM_getValue('locations') || {})) {
+	} else if (location.hostname in (GM_getValue('locations', {}))) {
 		l(`'${location.hostname}' is in the anti-activation list.`);
 		return;
 	}
