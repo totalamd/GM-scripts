@@ -7,8 +7,8 @@
 // @match           *://rutracker.net/*
 // @exclude         
 // @version         1
-// @downloadURL 
-// @updateURL   
+// @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/rutracker.net_anti-mirror.user.js
+// @updateURL       https://github.com/totalamd/GM-scripts/raw/master/rutracker.net_anti-mirror.user.js
 // @grant           none
 // @noframes
 // @run-at          document-idle
