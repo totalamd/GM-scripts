@@ -13,6 +13,9 @@
 // @noframes
 // ==/UserScript==
 
+// TODO:
+// - [ ] deal with win-1251 encoding for anchor part of the links (after #)
+
 "use strict";
 const l = function(){}, i = function(){};
 
