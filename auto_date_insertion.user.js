@@ -5,7 +5,7 @@
 // @description:ru Автоматическое проставление сегодняшней даты, вашего номера счёта, телефона и адреса почты в форме подачи данных на странице belssb.ru/individuals/pokaz/  
 // @namespace      totalamd
 // @match          http://belssb.ru/individuals/pokaz/
-// @version        1.1
+// @version        1.1.0.1
 // @downloadURL    
 // @updateURL      
 // @grant          GM_listValues
@@ -19,9 +19,9 @@
 "use strict";
 
 (function(){
-	const ACCOUNT = GM_getValue('account') || "";
-	const EMAIL = GM_getValue('email') || "";
-	const PHONE = GM_getValue('phone') || "";
+	const ACCOUNT = GM_getValue('account', "");
+	const EMAIL = GM_getValue('email', "");
+	const PHONE = GM_getValue('phone', "");
 	const ACCOUNT_PROMPT = navigator.language === 'ru' ? 'Введите номер счёта:' : 'Enter your account number:';
 	const EMAIL_PROMPT = navigator.language === 'ru' ? 'Введите адрес электронной почты:' : 'Enter your email address:';
 	const PHONE_PROMPT = navigator.language === 'ru' ? 'Введите номер телефона:' : 'Enter your phone number:';
@@ -33,11 +33,9 @@
 	document.querySelector('#input-phone').value = PHONE;
 	document.querySelector('#input-c_day').focus();
 
-	GM_registerMenuCommand(`-- ${GM_info.script.localizedName} MENU --`);
 	GM_registerMenuCommand(MENU_ITEMS[0], setAccount);
 	GM_registerMenuCommand(MENU_ITEMS[1], setEmail);
 	GM_registerMenuCommand(MENU_ITEMS[2], setPhone);
-	GM_registerMenuCommand('');
 
 	function setAccount() {
 		GM_setValue('account', prompt(ACCOUNT_PROMPT));
