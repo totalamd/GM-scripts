@@ -5,45 +5,41 @@
 // @description:ru Автоматическое проставление сегодняшней даты, вашего номера счёта, телефона и адреса почты в форме подачи данных на странице belssb.ru/individuals/pokaz/  
 // @namespace      totalamd
 // @match          http://belssb.ru/individuals/pokaz/
-// @version        1.1.0.1
+// @version        2.0
 // @downloadURL    
 // @updateURL      
-// @grant          GM_listValues
-// @grant          GM_setValue
-// @grant          GM_getValue
-// @grant          GM_deleteValue
-// @grant          GM_registerMenuCommand
+// @grant          none
 // @noframes
 // ==/UserScript==
 
 "use strict";
+const l = function(){}, i = function(){};
 
 (function(){
-	const ACCOUNT = GM_getValue('account', "");
-	const EMAIL = GM_getValue('email', "");
-	const PHONE = GM_getValue('phone', "");
-	const ACCOUNT_PROMPT = navigator.language === 'ru' ? 'Введите номер счёта:' : 'Enter your account number:';
-	const EMAIL_PROMPT = navigator.language === 'ru' ? 'Введите адрес электронной почты:' : 'Enter your email address:';
-	const PHONE_PROMPT = navigator.language === 'ru' ? 'Введите номер телефона:' : 'Enter your phone number:';
-	const MENU_ITEMS = navigator.language === 'ru' ? ['Запомнить счёт', 'Запомнить почту', 'Запомнить телефон'] : ['Set account', 'Set email', 'Set phone'];
+	const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
 
+	const LOCALSTORAGE_NAME = GM_info.script.name;
+	const INPUTS_LIST = ['#input-phone', '#input-email', '#input-account', '#input-c_delivery'];
+
+	const save = () => {
+		const info = {};
+		INPUTS_LIST.forEach((selector) => {
+			info[selector] = document.querySelector(selector).value;
+		});
+		localStorage.setItem(LOCALSTORAGE_NAME, JSON.stringify(info));
+	}
+
+	const load = () => {
+		const info = JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME));
+		if (info) {
+			INPUTS_LIST.forEach((selector) => {
+				document.querySelector(selector).value = info[selector];
+			});
+		}
+	}
+
+	load();
+	document.querySelector('.submitButton').addEventListener('click', save);
 	document.querySelector('#input-c_date').value = (new Date).toLocaleDateString();
-	document.querySelector('#input-account').value = ACCOUNT;
-	document.querySelector('#input-email').value = EMAIL;
-	document.querySelector('#input-phone').value = PHONE;
 	document.querySelector('#input-c_day').focus();
-
-	GM_registerMenuCommand(MENU_ITEMS[0], setAccount);
-	GM_registerMenuCommand(MENU_ITEMS[1], setEmail);
-	GM_registerMenuCommand(MENU_ITEMS[2], setPhone);
-
-	function setAccount() {
-		GM_setValue('account', prompt(ACCOUNT_PROMPT));
-	}
-	function setEmail() {
-		GM_setValue('email', prompt(EMAIL_PROMPT));
-	}
-	function setPhone() {
-		GM_setValue('phone', prompt(PHONE_PROMPT));
-	}
-}())
+}());
