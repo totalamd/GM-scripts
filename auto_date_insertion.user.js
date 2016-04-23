@@ -6,8 +6,8 @@
 // @namespace      totalamd
 // @match          http://belssb.ru/individuals/pokaz/
 // @version        2.0
-// @downloadURL    
-// @updateURL      
+// @downloadURL    https://github.com/totalamd/GM-scripts/raw/master/auto_date_insertion.user.js
+// @updateURL      https://github.com/totalamd/GM-scripts/raw/master/auto_date_insertion.user.js
 // @grant          none
 // @noframes
 // ==/UserScript==
@@ -16,7 +16,7 @@
 const l = function(){}, i = function(){};
 
 (function(){
-	const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
+	// const l = console.log.bind(console, `${GM_info.script.name} debug:`), i = console.info.bind(console, `${GM_info.script.name} debug:`);
 
 	const LOCALSTORAGE_NAME = GM_info.script.name;
 	const INPUTS_LIST = ['#input-phone', '#input-email', '#input-account', '#input-c_delivery'];
