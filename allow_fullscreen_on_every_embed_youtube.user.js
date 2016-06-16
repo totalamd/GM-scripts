@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        youtube: allow fullscreen on every embed
-// @namespace   totalamd github
+// @namespace   github.com/totalamd
 // @match       *://*/*
-// @version     1.0.0.1
+// @version     1.0.0.2
 // @downloadURL https://github.com/totalamd/GM-scripts/raw/master/allow_fullscreen_on_every_embed_youtube.user.js
 // @updateURL   https://github.com/totalamd/GM-scripts/raw/master/allow_fullscreen_on_every_embed_youtube.user.js
 // @noframes
