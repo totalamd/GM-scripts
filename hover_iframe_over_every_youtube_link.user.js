@@ -6,7 +6,7 @@
 // @namespace       github.com/totalamd
 // @match           *://*/*
 // @exclude         *://*.youtube.com/*
-// @version         1.0.2.4
+// @version         1.0.2.5
 // @downloadURL     https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @updateURL       https://github.com/totalamd/GM-scripts/raw/master/hover_iframe_over_every_youtube_link.user.js
 // @grant           none
