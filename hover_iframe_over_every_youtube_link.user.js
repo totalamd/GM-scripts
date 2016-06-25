@@ -48,7 +48,7 @@ const l = function(){}, i = function(){};
 		hover.style.top = 0;
 		hover.style.left = 0;
 		hover.style.backgroundColor = 'rgba(200, 200, 200, 0.6)';
-		hover_div.style.zIndex = '103'; // hack over google search result page
+		hover_div.style.zIndex = '103'; // hack against google SERP
 		iframe.src = `//youtube.com/embed/${id}`;
 		iframe.width = width;
 		iframe.height = height;
