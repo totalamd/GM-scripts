@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name        n+1.ru fixes
-// @description no crisp edges, time&dissiculty separator transition
+// @name        nplus1.ru fixes
+// @description no crisp edges, time&difficulty separator transition
 // @namespace   totalamd
 // @include     https://nplus1.ru/*
 // @version     1
