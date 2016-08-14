@@ -1,5 +1,5 @@
 ###### RU
-# Мои пользовательские скрипты для GreaseMonkey/TamperMonkey/ViolentMonkey
+# Пользовательские скрипты для GreaseMonkey/TamperMonkey/ViolentMonkey
 
 [Medusa.io_CardSidebar_overflow_auto.user.js](Medusa.io_CardSidebar_overflow_auto.user.js) — *(устар.)* убирает лишние вертикальные и горизонтальные полосы прокрутки на оглавлении карточек на Медузе
 
@@ -30,4 +30,4 @@
 ---
 
 ###### EN
-# My userscripts for GreaseMonkey/TamperMonkey/ViolentMonkey
+# Userscripts for GreaseMonkey/TamperMonkey/ViolentMonkey
