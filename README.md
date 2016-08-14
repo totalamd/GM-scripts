@@ -19,7 +19,13 @@
 
 [ljnav.user.js](ljnav.user.js) — добавляет клавиатурные сокращения в [LJ](https://livejournal.com) для навигации по постам: Ctrl-→ и Ctrl-← — перейти на следующий/предыдущий пост
 
+[lurkmore_pictures_fix.user.js](lurkmore_pictures_fix.user.js) — чинит неправильные адреса картинок и галерей на [lurkmore.to](https://lurkmore.to) и [lurkmo.re](https://lurkmo.re), заменяя в них lurkmore.so на текущее доменное имя открытой страницы (lurkmore.to/lurkmo.re).
 
+[nplus1.ru_no_crisp_edges.user.js](nplus1.ru_no_crisp_edges.user.js) — отключает на [nplus1.ru](https://nplus1.ru) режим не-сглаживания картинок при уменьшении (заметно на превью и иллюстрациях), а также чинит неплавные переходы цветов при наведении на дату/время и сложность публикации
+
+[reestr.rublacklist.net_URL_decoder.user.js](reestr.rublacklist.net_URL_decoder.user.js) — в [реестре rublacklist.net](https://reestr.rublacklist.net) возвращает обратно закодированные русские буквы в адресах сайтов
+
+[rutracker.net_anti-mirror.user.js](rutracker.net_anti-mirror.user.js) — отключает в зеркале [rutracker.net](https://rutracker.net) зеркалирование самой страницы
 
 ---
 
